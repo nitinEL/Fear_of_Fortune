@@ -95,7 +95,7 @@ function AndroidvisibilityChange() {
 // =================== Load Game ============================
 function LoadUnityGame() {
 
-    FullScreen();
+  //VV  FullScreen();
     AndroidInit();
 
     if (isGameStarted == false) {

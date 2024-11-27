@@ -18,55 +18,19 @@
     <script>
 
     // Important variables
-    var AdsBlocked = 0;
     var gameInstance;
-    var GameOrientation;
+    var GameOrientation="landscape";//portrait
     var FullScreenState = 0;
     var ShouldExitNext = false;
-    var IsAdsRunning = false;
 
 
-    var Channel = "";
+    var Channel = "false";
 
 
-    if(Boolean(false))
-    {
-      GameOrientation = "portrait";
-    }
-    else{
-      GameOrientation = "landscape";
-    }
-
-
-    function AdsBlockerDetected()
-    {
-      console.error('Can not load Google ad script');
-      AdsBlocked = 1;
-    }
 
     </script>
 
-    <script async
-            id="AdsScript"
-            data-ad-frequency-hint="30s"
-            data-adbreak-test="on"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109577825364690"
-            crossorigin="anonymous"
-            onerror="AdsBlockerDetected()"></script>
-    <script>
-
-        var script = document.getElementById("AdsScript");
-        console.log(script);
-        script.setAttribute("data-ad-channel", Channel);
-
-        window.adsbygoogle = window.adsbygoogle || [];
-        var adBreak = adConfig = function (o) { adsbygoogle.push(o); }
-        adConfig({
-            preloadAdBreaks: 'on',      // Should ads always be preloaded
-            sound: 'on',                 // Is sound currently enabled within the game
-        });
-
-    </script>
+    
 
     <script>
       document.addEventListener('fullscreenchange', FullScreenViewEvent);
@@ -86,11 +50,20 @@
             </div>
         </div>
     </div>
+    <script>
+ 
+          window.onload = function() {
+      
+            LoadUnityGame(); 
+        };
 
-    <div id="StartGame" class="background">
-        <img class="logo-image" src="TemplateData/loading_home.png"></img>
-        <button class="btn StartBtn" onclick="PlayNowBtnClick()">Play Game</button>
-    </div>
+
+           document.addEventListener("touchend", function() {
+               FullScreen();
+                AndroidInit();
+              LockDevice();
+           });
+               </script>
 
     <div id="FullScreen" class="background">
         <img class="logo-image" src="TemplateData/loading_home.png"></img>
@@ -100,6 +73,7 @@
     <script>
 
 
+//Do not Change
 
   function loadGame(){
 
@@ -139,9 +113,9 @@
     var buildUrl = "Build";
     var loaderUrl = buildUrl + "/Fear_of_Fortune.loader.js";
     var config = {
-      dataUrl: buildUrl + "/Fear_of_Fortune.data",
-      frameworkUrl: buildUrl + "/Fear_of_Fortune.framework.js",
-        codeUrl: buildUrl + "/Fear_of_Fortune.wasm",
+      dataUrl: buildUrl + "/Fear_of_Fortune.data.br",
+      frameworkUrl: buildUrl + "/Fear_of_Fortune.framework.js.br",
+        codeUrl: buildUrl + "/Fear_of_Fortune.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Fear_of_Fortune",
@@ -184,7 +158,7 @@
         script.src = loaderUrl;
         script.onload = () => {
             createUnityInstance(canvas, config, (progress) => {
-                progressBarFull.style.width = 100 * progress + "%";
+                progressBarFull.style.width =100 * progress +  "%";
             }).then((unityInstance) => {
 
                 gameInstance = unityInstance;
